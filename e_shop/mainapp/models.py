@@ -21,9 +21,15 @@ class Category(models.Model):
         return self.name
 # Second model
 class Product(models.Model):
+    category = models.CharField(max_length=255, verbose_name='Category',  on_delete=models.CASCADE)
     title = models.CharField(max_length=255, verbose_name='Name of product')
     slug = models.SlugField(unique=True)
-    image = models.ImageField()
+    image = models.ImageField(verbose_name='Images')
     description = models.TextField(verbose_name='Description', null=True)#<-- null = True means that this filed can be empty
     price = models.TextField(max_digits=9, decimal_places=2, verbose_name='price')
 
+    def __str__(self):
+        return self.title
+#Third model
+
+class CartProduct(models.Model):
